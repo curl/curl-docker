@@ -1,0 +1,5 @@
+name='Dan Fandrich'
+email='dan@coneharvesters.com'
+desc='Linux (Debian stable) x86_64 gcc @GCC_VERSION@ glibc @GLIBC_VERSION@'
+confopts='--enable-debug --enable-hidden-symbols --with-ssl --with-zlib --with-libssh2 --with-librtmp --with-gssapi --with-libpsl --enable-ldap --enable-ldaps'
+notes=''

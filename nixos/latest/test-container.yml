@@ -1,0 +1,23 @@
+schemaVersion: "2.0.0"
+
+metadataTest:
+  labels:
+    - key: 'se.haxx.curl'
+      value: 'curl'
+  exposedPorts: []
+  entrypoint: ["/docker-entrypoint.sh"]
+  workdir: ""
+
+fileExistenceTests:
+- name: 'curl'
+  path: '/usr/bin/curl'
+  shouldExist: true
+- name: 'libcurl.so.4.5'
+  path: '/usr/lib/libcurl.so.4.5.0'
+  shouldExist: true
+- name: 'libcurl.so.4'
+  path: '/usr/lib/libcurl.so.4'
+  shouldExist: true
+- name: 'libcurl.so'
+  path: '/usr/lib/libcurl.so'
+  shouldExist: true
