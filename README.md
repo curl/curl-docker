@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/xquery/curl-docker.svg?branch=master)](https://travis-ci.org/xquery/curl-docker)
+[![Build Status](https://travis-ci.org/xquery/curl-docker.svg?branch=master)](https://travis-ci.org/curl/curl-docker)
 
 # Curl Docker Images repository
 
