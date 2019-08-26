@@ -24,7 +24,6 @@ __pycache__
 CHANGES.dist
 Debug
 INSTALL
-Makefile
 Makefile.in
 Release
 TAGS
