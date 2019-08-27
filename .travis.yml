@@ -1,0 +1,18 @@
+language: minimal
+
+sudo: required
+dist: trusty
+
+before_script:
+  - echo '{"experimental":true}' | sudo tee /etc/docker/daemon.json
+  - sudo service docker restart
+
+script: make all
+
+branches:
+    only:
+        - master
+        - /\/ci$/
+
+notifications:
+  email: false
