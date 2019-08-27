@@ -2,13 +2,11 @@
 # set options
 #***************************************************************************
 
-export LATEST_RELEASE_REDIRECT = $(shell curl -s https://github.com/curl/curl/releases/latest -w'%{redirect_url}\n' -o /dev/null)
-
-export LATEST_RELEASE_TAG = $(shell basename $(LATEST_RELEASE_REDIRECT))
-export LATEST_RELEASE_VERSION = $(shell echo $(LATEST_RELEASE_REDIRECT)| cut -d'-' -f 2)
+export LATEST_RELEASE_TAG=curl-7_65_3
+export LATEST_RELEASE_VERSION=7_65_3
 
 # set curl configure options
-export CONFIGURE_BUILD_OPTS=-"--enable-static --disable-shared --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl"
+export CONFIGURE_BUILD_OPTS=-"--enable-static --disable-shared --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl --prefix=/usr"
 
 # set docker build options used when building docker images
 export DOCKER_BUILD_OPTS=--compress --squash

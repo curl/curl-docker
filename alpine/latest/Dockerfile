@@ -23,15 +23,13 @@ ARG LABEL_DESC=curl
 ###############################################################
 # install deps and use latest curl release source
 RUN \
-    apk add --no-cache \
+    apk add \
        autoconf    \
        automake    \
        build-base  \
        curl-dev    \
        groff       \
-       libtool     \
-    && \
-    rm -rf "/var/cache/apk/"*
+       libtool
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"
@@ -65,10 +63,9 @@ LABEL Version="${LABEL_VERSION}"
 LABEL docker.cmd="docker run -it curl/curl:${CURL_RELEASE_VERSION} http://curl.haxx.se"
 
 ###############################################################
-# remove curl
+# dependencies
 ###############################################################
-RUN apk del --no-cache curl && \
-    apk add --no-cache nghttp2 ca-certificates
+RUN apk add --no-cache nghttp2 ca-certificates
 
 ###############################################################
 # add non privileged curl user
