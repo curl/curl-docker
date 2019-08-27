@@ -1,6 +1,6 @@
 # Supported tags and respective Dockerfile links
 
-* [7_65_3](), [latest]()
+* [7.65.3](https://github.com/curl/curl-docker/blob/master/alpine/latest/Dockerfile)
 
 # Quick reference
 * Where to get help: [website](https://curl.haxx.se/), [mailing lists](https://curl.haxx.se/mail/), [Everything Curl](https://curl.haxx.se/book.html)
@@ -33,7 +33,7 @@ DICT, FILE, FTP, FTPS, Gopher, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3
 ```
 Here is a more specific example 
 ```
-> docker run --rm -it curlimages/curl:7_65_3 -v https://curl.haxx.se 
+> docker run --rm -it curlimages/curl:7.65.3 -v https://curl.haxx.se 
 ```
 
 
