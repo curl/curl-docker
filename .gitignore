@@ -62,3 +62,5 @@ libstandaloneengine.a
 curl.tar.gz
 setup
 .DS_Store
+alpine/latest/curl
+bin
