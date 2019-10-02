@@ -1,6 +1,7 @@
 # Supported tags and respective Dockerfile links
 
-* [7.65.3](https://github.com/curl/curl-docker/blob/master/alpine/latest/Dockerfile)
+* [7.65.3](https://github.com/curl/curl-docker/blob/9dc2f169f0e8e57da8d54c01bd938275e049d098/alpine/latest/Dockerfile)
+* [7.66.0](https://github.com/curl/curl-docker/blob/master/alpine/latest/Dockerfile)
 
 # Quick reference
 * Where to get help: [website](https://curl.haxx.se/), [mailing lists](https://curl.haxx.se/mail/), [Everything Curl](https://curl.haxx.se/book.html)
