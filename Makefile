@@ -3,7 +3,7 @@
 #***************************************************************************
 
 export LATEST_RELEASE_TAG=curl-7_66_0
-export LATEST_RELEASE_VERSION=7_66_0
+export LATEST_RELEASE_VERSION=7.66.0
 
 # set curl configure options
 export CONFIGURE_BUILD_OPTS=-"--enable-static --disable-shared --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl --prefix=/usr"

@@ -60,7 +60,7 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.66.0 http://curl.haxx.se"
+LABEL docker.cmd="docker run -it curl/curl:${CURL_RELEASE_VERSION} http://curl.haxx.se"
 
 ###############################################################
 # dependencies
