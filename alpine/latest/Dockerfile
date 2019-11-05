@@ -42,9 +42,9 @@ RUN ./buildconf && \
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
-# pinning to Alpine 3.10.2
+# pinning to Alpine 3.10.3
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.10.2
+FROM registry.hub.docker.com/library/alpine:3.10.3
 
 ARG CURL_RELEASE_TAG=latest
 ARG CURL_RELEASE_VERSION
