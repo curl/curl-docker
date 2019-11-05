@@ -1,3 +1,5 @@
+alpine/latest/curl/
+bin/
 *.asc
 *.dll
 *.exe
