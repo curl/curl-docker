@@ -4,9 +4,9 @@
 #
 # SPDX-License-Identifier: MIT
 #
-# pinning to Alpine 3.10.2 as base image
+# pinning to Alpine 3.10.3 as base image
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.10.2 AS builder
+FROM registry.hub.docker.com/library/alpine:3.10.3 AS builder
 
 ###############################################################
 # set build args
