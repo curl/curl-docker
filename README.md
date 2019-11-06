@@ -6,7 +6,8 @@ This repository defines internal & official curl docker images.
 
 * [alpine](alpine/)
 
-which are published to hub.docker.com.
+which are published to [hub.docker.com](https://hub.docker.com/r/curlimages/curl).
+
 
 __note__ - requires latest docker to be installed and available
 
