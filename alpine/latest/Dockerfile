@@ -24,11 +24,15 @@ ARG LABEL_DESC=curl
 # install deps and use latest curl release source
 RUN \
     apk add \
-       autoconf    \
-       automake    \
-       build-base  \
-       curl-dev    \
-       groff       \
+       libssh2-dev      \
+       libssh2          \
+       libssh2-static    \
+       autoconf     \
+       automake     \
+       build-base   \
+       groff        \
+       curl-dev     \
+       openssl      \
        libtool
 
 RUN mkdir /src
@@ -60,12 +64,12 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.65.3 http://curl.haxx.se"
+LABEL docker.cmd="docker run -it curl/curl:7.67.0 http://curl.haxx.se"
 
 ###############################################################
 # dependencies
 ###############################################################
-RUN apk add --no-cache nghttp2 ca-certificates
+RUN apk add --no-cache nghttp2 libssh2 ca-certificates curl
 
 ###############################################################
 # add non privileged curl user
@@ -73,16 +77,28 @@ RUN apk add --no-cache nghttp2 ca-certificates
 RUN addgroup -S curl_group && adduser -S curl_user -G curl_group
 
 ###############################################################
+# install curl ca bundle
+###############################################################
+RUN curl https://curl.haxx.se/ca/cacert.pem  -o cacert.pem
+ENV CURL_CA_BUNDLE="/cacert.pem"
+RUN apk del --no-cache curl ca-certificates
+
+###############################################################
 # install curl built from builder
 ###############################################################
 COPY --from=builder "/alpine/usr/local/lib/libcurl.so" "/usr/lib/libcurl.so"
-COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4" "/usr/lib/libcurl.so.4"
+COPY --from=builder "/alpine/usr/local/lib/libcurl.so" "/usr/lib/libcurl.so"
+COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.6.0" "/usr/lib/libcurl.so.4"
 COPY --from=builder "/alpine/usr/local/bin/curl" "/usr/bin/curl"
 
 ###############################################################
-# copy and set entrypoint
+# set user
+###############################################################
+USER curl_user
+
+###############################################################
+# set entrypoint
 ###############################################################
 COPY "entrypoint.sh" "/entrypoint.sh"
-USER curl_user
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["curl"]
