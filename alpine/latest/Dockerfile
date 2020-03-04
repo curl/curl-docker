@@ -6,7 +6,7 @@
 #
 # pinning to Alpine 3.10.3 as base image
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.10.3 AS builder
+FROM registry.hub.docker.com/library/alpine:3.11.3 AS builder
 
 ###############################################################
 # set build args
@@ -46,9 +46,9 @@ RUN ./buildconf && \
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
-# pinning to Alpine 3.10.3
+# pinning to Alpine 3.11.3
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.10.3
+FROM registry.hub.docker.com/library/alpine:3.11.3
 
 ARG CURL_RELEASE_TAG=latest
 ARG CURL_RELEASE_VERSION
@@ -64,7 +64,7 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.68.0 http://curl.haxx.se"
+LABEL docker.cmd="docker run -it curl/curl:7.69.0 http://curl.haxx.se"
 
 ###############################################################
 # dependencies

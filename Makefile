@@ -2,8 +2,8 @@
 # set options
 #***************************************************************************
 
-export LATEST_RELEASE_TAG=curl-7_68_0
-export LATEST_RELEASE_VERSION=7_68_0
+export LATEST_RELEASE_TAG=curl-7_69_0
+export LATEST_RELEASE_VERSION=7_69_0
 
 # set curl configure options
 export CONFIGURE_BUILD_OPTS=" --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl --with-libssh2 --prefix=/usr/local"
