@@ -9,8 +9,8 @@ test:
 	docker run --rm -it curl/curl:${LATEST_RELEASE_VERSION} -S http://httpbin.org/get
 
 push-registry:
-	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:7.69.0
-	docker push curlimages/curl:7.69.0
+	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:7.69.1
+	docker push curlimages/curl:7.69.1
 	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:latest
 	docker push curlimages/curl:latest
 
