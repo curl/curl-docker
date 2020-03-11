@@ -9,13 +9,13 @@ test:
 	docker run --rm -it curl/curl:${LATEST_RELEASE_VERSION} -S http://httpbin.org/get
 
 push-registry:
-	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:7.69.0
-	docker push curlimages/curl:7.69.0
+	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:7.69.1
+	docker push curlimages/curl:7.69.1
 	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:latest
 	docker push curlimages/curl:latest
 
 scan:
-	curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r "curl/curl:${LATEST_RELEASE_VERSION}"
+	curl -s https://ci-tools.anchore.io/inline_scan-v0.6.1 | bash -s -- -p -r "curl/curl:${LATEST_RELEASE_VERSION}"
 
 clean:
 	rm -Rf curl
