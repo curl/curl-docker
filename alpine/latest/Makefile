@@ -15,7 +15,7 @@ push-registry:
 	docker push curlimages/curl:latest
 
 scan:
-	curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r "curl/curl:${LATEST_RELEASE_VERSION}"
+	curl -s https://ci-tools.anchore.io/inline_scan-v0.6.1 | bash -s -- -p -r "curl/curl:${LATEST_RELEASE_VERSION}"
 
 clean:
 	rm -Rf curl
