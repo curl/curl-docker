@@ -92,5 +92,5 @@ USER curl_user
 # set entrypoint
 ###############################################################
 COPY "entrypoint.sh" "/entrypoint.sh"
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["curl"]
+ENTRYPOINT ["/entrypoint.sh"]
