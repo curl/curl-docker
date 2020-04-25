@@ -1,6 +1,6 @@
 ###############################################################
 #
-# Copyright (C) 2019 James Fuller <jim.fuller@webcomposite.com>
+# Copyright (C) 2020 James Fuller <jim.fuller@webcomposite.com>
 #
 # SPDX-License-Identifier: MIT
 #
