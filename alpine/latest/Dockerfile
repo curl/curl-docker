@@ -37,7 +37,7 @@ RUN \
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"
-WORKDIR "/src/curl"
+WORKDIR /src/curl
 
 RUN ./buildconf && \
     autoreconf -vif && \
@@ -86,7 +86,6 @@ RUN apk del --no-cache curl ca-certificates
 ###############################################################
 # install curl built from builder
 ###############################################################
-COPY --from=builder "/alpine/usr/local/lib/libcurl.so" "/usr/lib/libcurl.so"
 COPY --from=builder "/alpine/usr/local/lib/libcurl.so" "/usr/lib/libcurl.so"
 COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.6.0" "/usr/lib/libcurl.so.4"
 COPY --from=builder "/alpine/usr/local/bin/curl" "/usr/bin/curl"
