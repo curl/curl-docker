@@ -4,9 +4,9 @@
 #
 # SPDX-License-Identifier: MIT
 #
-# pinning to Alpine 3.10.3 as base image
+# pinning builder image to Alpine 3.11.5
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.11.3 AS builder
+FROM registry.hub.docker.com/library/alpine:3.11.5 AS builder
 
 ###############################################################
 # set build args
@@ -22,18 +22,23 @@ ARG LABEL_DESC=curl
 # build curl
 ###############################################################
 # install deps and use latest curl release source
-RUN \
-    apk add libssh2 libssh2-dev libssh2-static \
-        autoconf automake build-base           \
-        groff openssl curl-dev                 \
+RUN apk --update add libssh2 libssh2-dev libssh2-static \
+        autoconf automake build-base                    \
+        groff openssl curl-dev                          \
         libtool curl
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"
 WORKDIR /src/curl
 
+###############################################################
+# get ca cert bundle from curl.haxx.se
+###############################################################
 RUN curl https://curl.haxx.se/ca/cacert.pem  -o /cacert.pem
 
+###############################################################
+# build the tag version
+###############################################################
 RUN ./buildconf && \
     autoreconf -vif && \
     ./configure ${CURL_CONFIGURE_OPTION} &&\
@@ -41,9 +46,9 @@ RUN ./buildconf && \
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
-# pinning to Alpine 3.11.3
+# pinning image to Alpine 3.11.5
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.11.3
+FROM registry.hub.docker.com/library/alpine:3.11.5
 
 ARG CURL_RELEASE_TAG=latest
 ARG CURL_RELEASE_VERSION
@@ -59,12 +64,12 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.69.1 http://curl.haxx.se"
+LABEL docker.cmd="docker run -it curl/curl:7.69.1 -s -L http://curl.haxx.se"
 
 ###############################################################
 # dependencies
 ###############################################################
-RUN apk add --no-cache libssh2 nghttp2-dev
+RUN apk add --update --no-cache libssh2 nghttp2-dev
 
 ###############################################################
 # add non privileged curl user
@@ -72,7 +77,7 @@ RUN apk add --no-cache libssh2 nghttp2-dev
 RUN addgroup -S curl_group && adduser -S curl_user -G curl_group
 
 ###############################################################
-# install curl ca bundle
+# set curl ca bundle
 ###############################################################
 COPY --from=builder "/cacert.pem" "/cacert.pem"
 ENV CURL_CA_BUNDLE="/cacert.pem"
@@ -80,8 +85,12 @@ ENV CURL_CA_BUNDLE="/cacert.pem"
 ###############################################################
 # install curl built from builder
 ###############################################################
-COPY --from=builder "/alpine/usr/local/lib/libcurl.so*" "/usr/lib/"
+COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.6.0" "/usr/lib/"
 COPY --from=builder "/alpine/usr/local/bin/curl" "/usr/bin/curl"
+
+# explicitly set symlinks
+RUN ln -s /usr/lib/libcurl.so.4.6.0 /usr/lib/libcurl.so.4
+RUN ln -s /usr/lib/libcurl.so.4 /usr/lib/libcurl.so
 
 ###############################################################
 # set user
