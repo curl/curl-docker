@@ -23,11 +23,10 @@ ARG LABEL_DESC=curl
 ###############################################################
 # install deps and use latest curl release source
 RUN \
-    apk add \
-       libssh2 libssh2-dev libssh2-static \
-       autoconf automake build-base       \
-       groff openssl curl-dev             \
-       libtool curl
+    apk add libssh2 libssh2-dev libssh2-static \
+        autoconf automake build-base           \
+        groff openssl curl-dev                 \
+        libtool curl
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"

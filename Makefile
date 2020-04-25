@@ -6,7 +6,7 @@ export LATEST_RELEASE_TAG=curl-7_69_1
 export LATEST_RELEASE_VERSION=7_69_1
 
 # set curl configure options
-export CONFIGURE_BUILD_OPTS=" --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl --with-libssh2 --with-nghttp2 \
+export CONFIGURE_BUILD_OPTS=" --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl --with-libssh2 --with-nghttp2=/usr \
 --prefix=/usr/local"
 
 # set docker build options used when building docker images
