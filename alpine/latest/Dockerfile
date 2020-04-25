@@ -24,20 +24,16 @@ ARG LABEL_DESC=curl
 # install deps and use latest curl release source
 RUN \
     apk add \
-       libssh2-dev      \
-       libssh2          \
-       libssh2-static    \
-       autoconf     \
-       automake     \
-       build-base   \
-       groff        \
-       curl-dev     \
-       openssl      \
-       libtool
+       libssh2 libssh2-dev libssh2-static \
+       autoconf automake build-base       \
+       groff openssl curl-dev             \
+       libtool curl
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"
 WORKDIR /src/curl
+
+RUN curl https://curl.haxx.se/ca/cacert.pem  -o /cacert.pem
 
 RUN ./buildconf && \
     autoreconf -vif && \
@@ -69,7 +65,7 @@ LABEL docker.cmd="docker run -it curl/curl:7.69.1 http://curl.haxx.se"
 ###############################################################
 # dependencies
 ###############################################################
-RUN apk add --no-cache nghttp2 libssh2 ca-certificates curl
+RUN apk add --no-cache libssh2 nghttp2-dev
 
 ###############################################################
 # add non privileged curl user
@@ -79,15 +75,13 @@ RUN addgroup -S curl_group && adduser -S curl_user -G curl_group
 ###############################################################
 # install curl ca bundle
 ###############################################################
-RUN curl https://curl.haxx.se/ca/cacert.pem  -o cacert.pem
+COPY --from=builder "/cacert.pem" "/cacert.pem"
 ENV CURL_CA_BUNDLE="/cacert.pem"
-RUN apk del --no-cache curl ca-certificates
 
 ###############################################################
 # install curl built from builder
 ###############################################################
-COPY --from=builder "/alpine/usr/local/lib/libcurl.so" "/usr/lib/libcurl.so"
-COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.6.0" "/usr/lib/libcurl.so.4"
+COPY --from=builder "/alpine/usr/local/lib/libcurl.so*" "/usr/lib/"
 COPY --from=builder "/alpine/usr/local/bin/curl" "/usr/bin/curl"
 
 ###############################################################
