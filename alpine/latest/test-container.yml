@@ -8,6 +8,12 @@ metadataTest:
   entrypoint: ["/entrypoint.sh"]
   workdir: ""
 
+commandTests:
+  - name: "curl"
+    setup: []
+    command: "curl"
+    args: ["-V"]
+
 fileExistenceTests:
 - name: 'curl'
   path: '/usr/bin/curl'
