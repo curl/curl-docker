@@ -2,17 +2,18 @@
 # set options
 #***************************************************************************
 
-export LATEST_RELEASE_TAG=curl-7_69_1
 export LATEST_RELEASE_VERSION=7_69_1
+export LATEST_RELEASE_TAG=curl-${LATEST_RELEASE_VERSION}
 
 # set curl configure options
-export CONFIGURE_BUILD_OPTS=" --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl --with-libssh2 --prefix=/usr/local"
+export CONFIGURE_BUILD_OPTS=" --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl --with-libssh2 --with-nghttp2=/usr \
+--prefix=/usr/local"
 
 # set docker build options used when building docker images
 export DOCKER_BUILD_OPTS=--no-cache --compress --squash
 
 # set docker build args used when building docker images
-export DOCKER_BUILD_ARGS =--build-arg CURL_CONFIGURE_OPTION=${CONFIGURE_BUILD_OPTS} \
+export DOCKER_BUILD_ARGS= --build-arg CURL_CONFIGURE_OPTION=${CONFIGURE_BUILD_OPTS} \
     --build-arg CURL_RELEASE_TAG=${LATEST_RELEASE_TAG} \
     --build-arg CURL_RELEASE_VERSION=${LATEST_RELEASE_VERSION} \
     --build-arg CURL_GIT_REPO=https://github.com/curl/curl.git \
