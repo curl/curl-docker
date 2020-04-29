@@ -3,11 +3,13 @@ language: minimal
 sudo: required
 dist: trusty
 
+env:
+  - DOCKER_CLI_EXPERIMENTAL=enabled
+
 before_script:
-  - echo '{"experimental":true}' | sudo tee /etc/docker/daemon.json
   - sudo service docker restart
 
-script: make all
+script: make all multibuild
 
 branches:
     only:
