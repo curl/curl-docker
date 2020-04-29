@@ -1,5 +1,5 @@
 build:
-	docker build ${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_ARGS} -t "curlimages/curl:${LATEST_RELEASE_VERSION}" -f Dockerfile .
+	docker build ${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_ARGS} -t "curl/curl:${LATEST_RELEASE_VERSION}" -f Dockerfile .
 
 multibuild:
 	docker buildx build ${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_ARGS} -t "curlimages/curl:test_${LATEST_RELEASE_VERSION}" --platform=${DOCKER_MULTI_ARCH} -f Dockerfile . --push
