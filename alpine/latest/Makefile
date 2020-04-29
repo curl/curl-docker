@@ -2,7 +2,7 @@ build:
 	docker build ${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_ARGS} -t "curl/curl:${LATEST_RELEASE_VERSION}" -f Dockerfile .
 
 multibuild:
-	docker buildx build ${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_ARGS} -t "curlimages/curl:test_${LATEST_RELEASE_VERSION}" --platform=${DOCKER_MULTI_ARCH} -f Dockerfile . --push
+	docker buildx build ${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_ARGS} -t "curlimages/curl:7.70.0" --platform=${DOCKER_MULTI_ARCH} -f Dockerfile . --push
 
 lint:
 	docker run --rm --privileged -v ${PWD}:/root/ projectatomic/dockerfile-lint dockerfile_lint -p -f Dockerfile
