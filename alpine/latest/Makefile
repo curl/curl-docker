@@ -1,6 +1,9 @@
 build:
 	docker build ${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_ARGS} -t "curl/curl:${LATEST_RELEASE_VERSION}" -f Dockerfile .
 
+multibuild:
+	docker buildx build ${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_ARGS} -t "curlimages/curl:7.70.0" --platform=${DOCKER_MULTI_ARCH} -f Dockerfile . --push
+
 lint:
 	docker run --rm --privileged -v ${PWD}:/root/ projectatomic/dockerfile-lint dockerfile_lint -p -f Dockerfile
 
@@ -9,8 +12,8 @@ test:
 	docker run --rm -it curl/curl:${LATEST_RELEASE_VERSION} -S http://httpbin.org/get
 
 push-registry:
-	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:7.69.1
-	docker push curlimages/curl:7.69.1
+	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:7.70.0
+	docker push curlimages/curl:7.70.0
 	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:latest
 	docker push curlimages/curl:latest
 
