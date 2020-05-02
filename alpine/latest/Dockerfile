@@ -25,8 +25,8 @@ ARG LABEL_DESC=curl
 RUN apk --update add libssh2 libssh2-dev libssh2-static \
         autoconf automake build-base                    \
         groff openssl curl-dev                          \
-        python3 python3-dev                  \
-        libtool curl stunnel
+        python3 python3-dev                             \
+        libtool curl stunnel perl
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"
