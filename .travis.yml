@@ -9,7 +9,7 @@ env:
 before_script:
   - sudo service docker restart
 
-script: make all
+script: make all lint scan
 
 branches:
     only:

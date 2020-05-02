@@ -25,7 +25,8 @@ ARG LABEL_DESC=curl
 RUN apk --update add libssh2 libssh2-dev libssh2-static \
         autoconf automake build-base                    \
         groff openssl curl-dev                          \
-        libtool curl
+        python3 python3-dev                  \
+        libtool curl stunnel
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"
@@ -43,6 +44,7 @@ RUN ./buildconf && \
     autoreconf -vif && \
     ./configure ${CURL_CONFIGURE_OPTION} &&\
     make -j$(nproc) &&\
+    make -j$(nproc) test &&\
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
