@@ -41,6 +41,13 @@ export DOCKER_MULTI_ARCH=linux/arm,linux/amd64,linux/arm64,linux/ppc64le,linux/s
 	cd alpine/latest;make multibuild;
 
 #***************************************************************************
+# build test image
+#***************************************************************************
+.buildtest: .buildtest-alpine
+.buildtest-alpine:
+	cd alpine/latest;make buildtest;
+
+#***************************************************************************
 # test docker images
 #***************************************************************************
 .test: .test-alpine
@@ -92,6 +99,7 @@ all: setup build test
 
 build: .build
 multibuild: .multibuild
+buildtest: .buildtest
 test: .test
 push: .push-registry
 scan: .scan

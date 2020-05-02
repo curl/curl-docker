@@ -2,7 +2,7 @@
 
 # Curl Docker Images repository
 
-This repository defines internal & official curl docker images.
+This repository defines the official curl docker image.
 
 * [alpine](alpine/)
 
@@ -27,7 +27,7 @@ $ docker run -it curlimages/curl:...insert tag... --version
 
 ### building and testing images
 
-To build and test all curl docker images
+To build and test curl docker image
 ```
 $ make all
 ```
@@ -35,11 +35,11 @@ which runs the setup (clean), build and test targets.
 
 ### scanning images
 
-Security scan of resultant docker images
+Security scan of resultant docker image
 ```
 $ make scan
 ```
-which uses anchore-engine, rkhunter, lynis and clamav.
+which uses trivis, anchore-engine, lynis and clamav.
 
 One can also run lint checker on dockerfiles
 ```
