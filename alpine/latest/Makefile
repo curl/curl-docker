@@ -23,7 +23,7 @@ push-registry:
 
 scan: buildtest
 	docker run --rm -it curl/curl:scan-test rkhunter --update -c -sk || true
-	docker run --rm -it curl/curl:scan-test clamscan -r -i || true
+	docker run --rm -it curl/curl:scan-test clamscan -r -i --exclude-dir=^/sys || true
 	docker run --rm -it curl/curl:scan-test lynis audit system
 	docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/root/.cache/ aquasec/trivy curl/curl:${LATEST_RELEASE_VERSION}
 	curl -s https://ci-tools.anchore.io/inline_scan-v0.6.1 | bash -s -- -p -r "curl/curl:${LATEST_RELEASE_VERSION}"
