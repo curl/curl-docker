@@ -71,7 +71,8 @@ LABEL docker.cmd="docker run -it curl/curl:7.70.0 -s -L http://curl.haxx.se"
 ###############################################################
 # dependencies
 ###############################################################
-RUN apk update --no-cache && apk upgrade --no-cache && \
+RUN apk update --no-cache && \
+    apk upgrade --no-cache && \
     apk add --update --no-cache libssh2 nghttp2-dev && \
     rm -fr /var/cache/apk/*
 
