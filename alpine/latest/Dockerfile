@@ -44,7 +44,7 @@ RUN ./buildconf && \
     autoreconf -vif && \
     ./configure ${CURL_CONFIGURE_OPTION} &&\
     make -j$(nproc) &&\
-    make -j$(nproc) test &&\
+    make test &&\
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
