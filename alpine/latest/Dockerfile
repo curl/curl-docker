@@ -26,7 +26,8 @@ RUN apk --update add libssh2 libssh2-dev libssh2-static \
         autoconf automake build-base                    \
         groff openssl curl-dev                          \
         python3 python3-dev                             \
-        libtool curl stunnel perl
+        libtool curl stunnel perl                       \
+        nghttp2
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"
@@ -66,7 +67,7 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.70.0 -s -L http://curl.haxx.se"
+LABEL docker.cmd="docker run -it curl/curl:7.71.0 -s -L http://curl.haxx.se"
 
 ###############################################################
 # dependencies
