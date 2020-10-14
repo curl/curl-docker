@@ -67,7 +67,7 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.72.0 -s -L http://curl.haxx.se"
+LABEL docker.cmd="docker run -it curl/curl:7.73.0 -s -L http://curl.haxx.se"
 
 ###############################################################
 # dependencies
@@ -91,11 +91,11 @@ ENV CURL_CA_BUNDLE="/cacert.pem"
 ###############################################################
 # install curl built from builder
 ###############################################################
-COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.6.0" "/usr/lib/"
+COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.7.0" "/usr/lib/"
 COPY --from=builder "/alpine/usr/local/bin/curl" "/usr/bin/curl"
 
 # explicitly set symlinks
-RUN ln -s /usr/lib/libcurl.so.4.6.0 /usr/lib/libcurl.so.4
+RUN ln -s /usr/lib/libcurl.so.4.7.0 /usr/lib/libcurl.so.4
 RUN ln -s /usr/lib/libcurl.so.4 /usr/lib/libcurl.so
 
 ###############################################################

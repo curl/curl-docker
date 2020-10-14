@@ -20,7 +20,7 @@ fileExistenceTests:
   shouldExist: true
   isExecutableBy: 'owner'
 - name: 'built_curl_library'
-  path: '/usr/lib/libcurl.so.4.6.0'
+  path: '/usr/lib/libcurl.so.4.7.0'
   shouldExist: true
 - name: 'built_curl_library_ls1'
   path: '/usr/lib/libcurl.so.4'
