@@ -1,0 +1,34 @@
+schemaVersion: "2.0.0"
+
+metadataTest:
+  labels:
+    - key: 'se.haxx.curl'
+      value: 'curl'
+  exposedPorts: []
+  entrypoint: ["/entrypoint.sh"]
+  workdir: ""
+
+commandTests:
+  - name: "curl"
+    setup: []
+    command: "curl"
+    args: ["-V"]
+
+fileExistenceTests:
+- name: 'curl'
+  path: '/usr/bin/curl'
+  shouldExist: true
+  isExecutableBy: 'owner'
+- name: 'built_curl_library'
+  path: '/usr/lib/libcurl.so.4.7.0'
+  shouldExist: true
+- name: 'built_curl_library_ls1'
+  path: '/usr/lib/libcurl.so.4'
+  shouldExist: true
+- name: 'built_curl_library_ls2'
+  path: '/usr/lib/libcurl.so'
+  shouldExist: true
+
+globalEnvVars:
+- key: "CURL_CA_BUNDLE"
+  value: "/cacert.pem"

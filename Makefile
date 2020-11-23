@@ -29,9 +29,11 @@ export DOCKER_MULTI_ARCH=linux/arm,linux/amd64,linux/arm64,linux/ppc64le,linux/s
 #***************************************************************************
 # build docker images
 #***************************************************************************
-.build: .build-alpine
+.build: .build-alpine .build-scratch
 .build-alpine:
 	cd alpine/latest;make build;
+.build-scratch:
+	cd scratch/latest;make build;
 
 #***************************************************************************
 # build and push multiarch docker images
