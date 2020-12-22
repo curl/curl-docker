@@ -22,11 +22,11 @@ ARG LABEL_DESC=curl
 # build curl
 ###############################################################
 # install deps and use latest curl release source
-RUN apk --update add libssh2 libssh2-dev libssh2-static \
-        autoconf automake build-base                    \
-        groff openssl curl-dev                          \
-        python3 python3-dev                             \
-        libtool curl stunnel perl                       \
+RUN apk add --no-cache libssh2 libssh2-dev libssh2-static \
+        autoconf automake build-base                      \
+        groff openssl curl-dev                            \
+        python3 python3-dev                               \
+        libtool curl stunnel perl                         \
         nghttp2
 
 RUN mkdir /src
@@ -72,10 +72,7 @@ LABEL docker.cmd="docker run -it curl/curl:7.74.0 -s -L http://curl.haxx.se"
 ###############################################################
 # dependencies
 ###############################################################
-RUN apk update --no-cache && \
-    apk upgrade --no-cache && \
-    apk add --update --no-cache libssh2 nghttp2-dev && \
-    rm -fr /var/cache/apk/*
+RUN apk add --no-cache libssh2 nghttp2-dev
 
 ###############################################################
 # add non privileged curl user
