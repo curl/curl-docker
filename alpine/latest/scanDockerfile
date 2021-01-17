@@ -20,12 +20,14 @@ RUN apk update
 RUN apk add bash build-base clamav clamav-dev cvechecker unrar linux-headers
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing lynis
 
-RUN curl https://sourceforge.net/projects/rkhunter/files/rkhunter/1.4.6/rkhunter-1.4.6.tar.gz/download -L -o rkhunter-1.4.6.tar.gz
-RUN gzip -d /rkhunter-1.4.6.tar.gz
-RUN tar -xvf /rkhunter-1.4.6.tar
-RUN cd /rkhunter-1.4.6 && ./installer.sh --install
+ENV RKHUNTER_VERSION 1.4.6
+
+RUN curl -fsSL -o rkhunter.tar.gz https://sourceforge.net/projects/rkhunter/files/rkhunter/${RKHUNTER_VERSION}/rkhunter-${RKHUNTER_VERSION}.tar.gz/download
+RUN mkdir /rkhunter && tar -xf rkhunter.tar.gz -C /rkhunter --strip-components=1
+RUN cd /rkhunter && ./installer.sh --install
 #RUN rkhunter --update
 RUN rkhunter --propupd
-RUN freshclam
+
+ENTRYPOINT ["/usr/bin/freshclam"]
 
 CMD ["/bin/bash"]
