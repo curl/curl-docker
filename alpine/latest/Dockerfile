@@ -4,9 +4,9 @@
 #
 # SPDX-License-Identifier: MIT
 #
-# pinning builder image to Alpine 3.11.5
+# pinning builder image to Alpine 3.12.3
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.11.5 AS builder
+FROM registry.hub.docker.com/library/alpine:3.12.3 AS builder
 
 ###############################################################
 # set build args
@@ -22,12 +22,12 @@ ARG LABEL_DESC=curl
 # build curl
 ###############################################################
 # install deps and use latest curl release source
-RUN apk --update add libssh2 libssh2-dev libssh2-static \
+RUN apk add libssh2 libssh2-dev libssh2-static \
         autoconf automake build-base                    \
         groff openssl curl-dev                          \
         python3 python3-dev                             \
         libtool curl stunnel perl                       \
-        nghttp2
+        nghttp2 brotli brotli-dev
 
 RUN mkdir /src
 COPY "curl"  "/src/curl"
@@ -36,7 +36,7 @@ WORKDIR /src/curl
 ###############################################################
 # get ca cert bundle from curl.haxx.se
 ###############################################################
-RUN curl https://curl.haxx.se/ca/cacert.pem  -o /cacert.pem
+RUN curl https://curl.haxx.se/ca/cacert.pem -L -o /cacert.pem
 
 ###############################################################
 # build the tag version
@@ -49,9 +49,9 @@ RUN ./buildconf && \
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
-# pinning image to Alpine 3.11.5
+# pinning image to Alpine 3.12.3
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.11.5
+FROM registry.hub.docker.com/library/alpine:3.12.3
 
 ARG CURL_RELEASE_TAG=latest
 ARG CURL_RELEASE_VERSION
@@ -67,14 +67,12 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.74.0 -s -L http://curl.haxx.se"
+LABEL docker.cmd="docker run -it curl/curl:7.75.0 -s -L http://curl.haxx.se"
 
 ###############################################################
 # dependencies
 ###############################################################
-RUN apk update --no-cache && \
-    apk upgrade --no-cache && \
-    apk add --update --no-cache libssh2 nghttp2-dev && \
+RUN apk add --no-cache brotli brotli-dev libssh2 nghttp2-dev && \
     rm -fr /var/cache/apk/*
 
 ###############################################################

@@ -6,7 +6,7 @@
 #
 # image for scanning
 ###############################################################
-FROM curl/curl:7_74_0
+FROM curl/curl:7_75_0
 
 USER root
 
@@ -20,7 +20,7 @@ RUN apk update
 RUN apk add bash build-base clamav clamav-dev cvechecker unrar linux-headers
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing lynis
 
-RUN curl https://sourceforge.net/projects/rkhunter/files/rkhunter/1.4.6/rkhunter-1.4.6.tar.gz/download -L -o rkhunter-1.4.6.tar.gz
+RUN curl https://sourceforge.net/projects/rkhunter/files/rkhunter/1.4.6/rkhunter-1.4.6.tar.gz/download -v -L -o rkhunter-1.4.6.tar.gz
 RUN gzip -d /rkhunter-1.4.6.tar.gz
 RUN tar -xvf /rkhunter-1.4.6.tar
 RUN cd /rkhunter-1.4.6 && ./installer.sh --install
