@@ -6,7 +6,7 @@
 #
 # image for scanning
 ###############################################################
-FROM curl/curl:7_76_0
+FROM curl/curl:7_76_1
 
 USER root
 
