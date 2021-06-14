@@ -1,0 +1,10 @@
+- job:
+    name: curl-docker
+    pre-run: zuul.d/playbooks/pre.yaml
+    run: zuul.d/playbooks/run.yaml
+    nodeset: ubuntu-focal
+
+- project:
+    check:
+      jobs:
+        - curl-docker

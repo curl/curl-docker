@@ -1,0 +1,10 @@
+- hosts: all
+  roles:
+    - ensure-docker
+  tasks:
+    - name: Install make and curl
+      become: true
+      apt:
+        name:
+          - make
+          - curl

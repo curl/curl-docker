@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+    - name: Build image
+      command: make all lint
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
