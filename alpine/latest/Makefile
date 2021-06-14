@@ -13,7 +13,7 @@ lint:
 
 test:
 	../../bin/container-structure-test test --image curl/curl:${LATEST_RELEASE_VERSION} --config "test-container.yml"
-	docker run --rm -it curl/curl:${LATEST_RELEASE_VERSION} -S http://httpbin.org/get
+	docker run --rm curl/curl:${LATEST_RELEASE_VERSION} -S http://httpbin.org/get
 
 push-registry:
 	docker tag curl/curl:${LATEST_RELEASE_VERSION} curlimages/curl:7.77.0
