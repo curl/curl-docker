@@ -4,9 +4,9 @@
 #
 # SPDX-License-Identifier: MIT
 #
-# pinning builder image to Alpine 3.12.7
+# pinning builder image to Alpine 3.14.0
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.12.7 AS builder
+FROM registry.hub.docker.com/library/alpine:3.14.0 AS builder
 
 ###############################################################
 # set build args
@@ -30,13 +30,13 @@ RUN apk add libssh2 libssh2-dev libssh2-static \
         nghttp2 brotli brotli-dev
 
 RUN mkdir /src
-COPY "curl"  "/src/curl"
+COPY "curl" "/src/curl"
 WORKDIR /src/curl
 
 ###############################################################
 # get ca cert bundle from curl.haxx.se
 ###############################################################
-RUN curl https://curl.haxx.se/ca/cacert.pem -L -o /cacert.pem
+RUN curl -fsS https://curl.haxx.se/ca/cacert.pem -L -o /cacert.pem
 
 ###############################################################
 # build the tag version
@@ -46,12 +46,12 @@ RUN ./buildconf && \
     ./configure ${CURL_CONFIGURE_OPTION} &&\
     make -j$(nproc) &&\
     #make test &&\
-    make DESTDIR="/alpine/" install  -j$(nproc)
+    make DESTDIR="/alpine/" install -j$(nproc)
 
 ###############################################################
-# pinning image to Alpine 3.12.7
+# pinning image to Alpine 3.14.0
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.12.7
+FROM registry.hub.docker.com/library/alpine:3.14.0
 
 ARG CURL_RELEASE_TAG=latest
 ARG CURL_RELEASE_VERSION
@@ -72,8 +72,10 @@ LABEL docker.cmd="docker run -it curl/curl:7.77.0 -s -L http://curl.se"
 ###############################################################
 # dependencies
 ###############################################################
-RUN apk add --no-cache brotli brotli-dev libssh2 nghttp2-dev && \
-    rm -fr /var/cache/apk/*
+RUN apk add --no-cache \
+    brotli-dev \
+    libssh2 \
+    nghttp2-dev
 
 ###############################################################
 # add non privileged curl user
