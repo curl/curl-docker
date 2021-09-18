@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/curl/curl-docker.svg?branch=master)](https://travis-ci.org/curl/curl-docker)
-
 # Curl Docker Images repository
 
 This repository defines the official curl docker image.
