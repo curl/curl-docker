@@ -4,9 +4,9 @@
 #
 # SPDX-License-Identifier: MIT
 #
-# pinning builder image to Alpine 3.14.0
+# pinning builder image to Alpine 3.14.2
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.14.0 AS builder
+FROM registry.hub.docker.com/library/alpine:3.14.2 AS builder
 
 ###############################################################
 # set build args
@@ -49,9 +49,9 @@ RUN ./buildconf && \
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
-# pinning image to Alpine 3.14.0
+# pinning image to Alpine 3.14.2
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.14.0
+FROM registry.hub.docker.com/library/alpine:3.14.2
 
 ARG CURL_RELEASE_TAG=latest
 ARG CURL_RELEASE_VERSION
