@@ -18,7 +18,7 @@ export DOCKER_BUILD_ARGS= --build-arg CURL_CONFIGURE_OPTION=${CONFIGURE_BUILD_OP
     --build-arg CURL_RELEASE_TAG=${LATEST_RELEASE_TAG} \
     --build-arg CURL_RELEASE_VERSION=${LATEST_RELEASE_VERSION} \
     --build-arg CURL_GIT_REPO=https://github.com/curl/curl.git \
-    --label Name=curl --label Version=1.0.0 \
+    --label name=curl --label version=1.0.0 \
     --label se.haxx.curl=curl \
     --label se.haxx.curl.version=${LATEST_RELEASE_VERSION} \
     --label se.haxx.curl.release_tag=${LATEST_RELEASE_TAG} \

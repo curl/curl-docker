@@ -64,10 +64,10 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 ###############################################################
 # define docker labels
 ###############################################################
-LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
-LABEL Name="curl"
-LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.82.0 -s -L http://curl.se"
+LABEL maintainer="James Fuller <jim.fuller@webcomposite.com>"
+LABEL name="${LABEL_NAME}"
+LABEL version="${LABEL_VERSION}"
+LABEL docker.cmd="docker run -it curl/curl:7.78.0 -s -L http://curl.se"
 
 ###############################################################
 # dependencies
