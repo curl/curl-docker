@@ -2,7 +2,7 @@
 # set options
 #***************************************************************************
 
-export LATEST_RELEASE_VERSION=7_81_0
+export LATEST_RELEASE_VERSION=7_82_0
 export LATEST_RELEASE_TAG=curl-${LATEST_RELEASE_VERSION}
 export DOCKER_CLI_EXPERIMENTAL=enabled
 
