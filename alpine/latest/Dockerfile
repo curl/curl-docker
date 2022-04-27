@@ -4,9 +4,9 @@
 #
 # SPDX-License-Identifier: MIT
 #
-# pinning builder image to Alpine 3.15.2
+# pinning builder image to Alpine 3.15.4
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.15.2 AS builder
+FROM registry.hub.docker.com/library/alpine:3.15.4 AS builder
 
 ###############################################################
 # set build args
@@ -22,6 +22,8 @@ ARG LABEL_DESC=curl
 # build curl
 ###############################################################
 # install deps and use latest curl release source
+RUN apk update
+RUN apk upgrade
 RUN apk add libssh2 libssh2-dev libssh2-static \
         autoconf automake build-base                    \
         groff openssl curl-dev                          \
@@ -49,9 +51,9 @@ RUN ./buildconf && \
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
-# pinning image to Alpine 3.15.2
+# pinning image to Alpine 3.15.4
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.15.2
+FROM registry.hub.docker.com/library/alpine:3.15.4
 
 ARG CURL_RELEASE_TAG=latest
 ARG CURL_RELEASE_VERSION
@@ -67,11 +69,13 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.82.0 -s -L http://curl.se"
+LABEL docker.cmd="docker run -it curl/curl:7.83.0 -s -L http://curl.se"
 
 ###############################################################
 # dependencies
 ###############################################################
+RUN apk update
+RUN apk upgrade
 RUN apk add --no-cache brotli brotli-dev libssh2 nghttp2-dev && \
     rm -fr /var/cache/apk/*
 
@@ -89,11 +93,12 @@ ENV CURL_CA_BUNDLE="/cacert.pem"
 ###############################################################
 # install curl built from builder
 ###############################################################
-COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.7.0" "/usr/lib/"
+COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.8.0" "/usr/lib/"
 COPY --from=builder "/alpine/usr/local/bin/curl" "/usr/bin/curl"
+COPY --from=builder "/alpine/usr/local/include/curl" "/usr/include/curl"
 
 # explicitly set symlinks
-RUN ln -s /usr/lib/libcurl.so.4.7.0 /usr/lib/libcurl.so.4
+RUN ln -s /usr/lib/libcurl.so.4.8.0 /usr/lib/libcurl.so.4
 RUN ln -s /usr/lib/libcurl.so.4 /usr/lib/libcurl.so
 
 ###############################################################
