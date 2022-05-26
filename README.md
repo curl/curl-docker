@@ -11,8 +11,8 @@ __note__ - requires latest docker to be installed and available
 
 ## Contact
 
-If you have problems, questions, ideas or suggestions, please contact [curl-docker team](curl-docker@haxx.se)
-or [Jim Fuller](jim.fuller@webcomposite.com) directly.
+If you have problems, questions, ideas or suggestions, please contact [curl-docker team](mailto:curl-docker@haxx.se)
+or [Jim Fuller](mailto:jim.fuller@webcomposite.com) directly.
 
 ## Using Images
 
