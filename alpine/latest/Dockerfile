@@ -69,12 +69,12 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:7.83.1 -s -L http://curl.se"
+LABEL docker.cmd="docker run -it curl/curl:7.84.0 -s -L http://curl.se"
 
 ###############################################################
 # dependencies
 ###############################################################
-RUN apk update
+# RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache brotli brotli-dev libssh2 nghttp2-dev && \
     rm -fr /var/cache/apk/*

@@ -2,7 +2,7 @@
 # set options
 #***************************************************************************
 
-export LATEST_RELEASE_VERSION=7_83_1
+export LATEST_RELEASE_VERSION=7_84_0
 export LATEST_RELEASE_TAG=curl-${LATEST_RELEASE_VERSION}
 export DOCKER_CLI_EXPERIMENTAL=enabled
 
@@ -24,7 +24,7 @@ export DOCKER_BUILD_ARGS= --build-arg CURL_CONFIGURE_OPTION=${CONFIGURE_BUILD_OP
     --label se.haxx.curl.release_tag=${LATEST_RELEASE_TAG} \
     --label se.haxx.curl.description="network utility"
 
-export DOCKER_MULTI_ARCH=linux/arm,linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386
+export DOCKER_MULTI_ARCH=linux/arm/v7,linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386
 
 #***************************************************************************
 # build docker images
