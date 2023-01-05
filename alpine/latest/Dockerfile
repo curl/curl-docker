@@ -75,7 +75,7 @@ LABEL docker.cmd="docker run -it curl/curl:7.87.0 -s -L http://curl.se"
 # dependencies
 ###############################################################
 # RUN apk update
-RUN apk upgrade
+RUN apk upgrade --no-cache
 RUN apk add --no-cache brotli brotli-dev libssh2 nghttp2-dev && \
     rm -fr /var/cache/apk/*
 
