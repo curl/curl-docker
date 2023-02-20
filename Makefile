@@ -3,7 +3,7 @@
 #***************************************************************************
 
 
-export LATEST_RELEASE_VERSION=7_87_0
+export LATEST_RELEASE_VERSION=7_88_1
 export LATEST_RELEASE_TAG=curl-${LATEST_RELEASE_VERSION}
 export DOCKER_CLI_EXPERIMENTAL=enabled
 
