@@ -105,6 +105,7 @@ RUN ln -s /usr/lib/libcurl.so.4 /usr/lib/libcurl.so
 # set user
 ###############################################################
 USER curl_user
+WORKDIR /home/curl_user
 
 ###############################################################
 # set entrypoint
