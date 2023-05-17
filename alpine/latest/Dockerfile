@@ -4,9 +4,9 @@
 #
 # SPDX-License-Identifier: MIT
 #
-# pinning builder image to Alpine 3.16.2
+# pinning builder image to Alpine 3.17.3
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.16.2 AS builder
+FROM registry.hub.docker.com/library/alpine:3.17.3 AS builder
 
 ###############################################################
 # set build args
@@ -51,9 +51,9 @@ RUN ./buildconf && \
     make DESTDIR="/alpine/" install  -j$(nproc)
 
 ###############################################################
-# pinning image to Alpine 3.16.2
+# pinning image to Alpine 3.17.3
 ###############################################################
-FROM registry.hub.docker.com/library/alpine:3.16.2
+FROM registry.hub.docker.com/library/alpine:3.17.3
 
 ARG CURL_RELEASE_TAG=latest
 ARG CURL_RELEASE_VERSION
@@ -69,7 +69,7 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:8.00.1 -s -L http://curl.se"
+LABEL docker.cmd="docker run -it curl/curl:8.1.0 -s -L http://curl.se"
 
 ###############################################################
 # dependencies
