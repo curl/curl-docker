@@ -1,4 +1,9 @@
-***IMPORTANT*** - https://github.com/curl/curl-container supersedes this repository
+***IMPORTANT*** - https://github.com/curl/curl-container supersedes this archived repository
+
+
+
+
+
 
 # Curl Docker Images repository
 
