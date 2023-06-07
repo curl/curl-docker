@@ -82,7 +82,11 @@ RUN apk add --no-cache brotli brotli-dev libssh2 nghttp2-dev && \
 ###############################################################
 # add non privileged curl user
 ###############################################################
-RUN addgroup -S curl_group && adduser -S curl_user -G curl_group
+
+# To fix some errors in kubernetes, we need a numeric id. We add this test to
+# avoid future errors if this ever changes.
+RUN addgroup -S curl_group && adduser -S curl_user -G curl_group && \
+    [ "$(cat /etc/passwd | grep curl_user | cut -d : -f3 )" -eq 100 ]
 
 ###############################################################
 # set curl ca bundle
@@ -104,7 +108,9 @@ RUN ln -s /usr/lib/libcurl.so.4 /usr/lib/libcurl.so
 ###############################################################
 # set user
 ###############################################################
-USER curl_user
+# We use a numeric id (that is tested for stability above) to avoid errors in
+# Kubernetes.
+USER 100
 
 ###############################################################
 # set entrypoint
